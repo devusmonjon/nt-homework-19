@@ -7,31 +7,9 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
+import { IData } from "@/interfaces";
 
-interface IData {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  },
-
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  },
-}
 
 const Page = () => {
   const [data, setdata] = useState<IData[]>([
@@ -96,7 +74,7 @@ const Page = () => {
     <div className="w-3/4 m-auto">
       <div className="mt-20">
         <Slider {...sliderSetting}>
-        {data.map((item, idx) => (
+        {data.map((item: IData, idx) => (
           <div key={item.id} className="bg-white h-[450px] text-black rounded-xl overflow-hidden cursor-pointer">
             <div className="h-56 rounded-t-xl bg-indigo-500 flex justify-center items-center overflow-hidden">
               <Image src={images[idx]} alt="image" width={176} height={176} className="w-full h-full object-cover" />
@@ -131,6 +109,7 @@ const Page = () => {
           </div>
         ))}
         </Slider>
+        <Link href={"/posts"} className="w-full flex justify-center mt-10"><button className="bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl mt-4">posts</button></ Link>
       </div>
     </div>
   )
