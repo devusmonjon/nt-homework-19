@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+    body {
+        background: #14161b;
+    }
+}
+
+.slick-slide>div {
+    margin: 0 10px;
+}
+
+.slick-dots li button {
+    background: #fff;
+}
+
+.slick-dots li button:before {
+    top: 20px !important;
+    color: #fff !important;
+    font-size: 10px !important;
+}
+
+.card:hover ul {
+    display: flex;
+}
+
+.card:hover button {
+    display: none;
+}
