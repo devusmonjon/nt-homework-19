@@ -7,11 +7,12 @@ const Page = ({params}: {params: {post: number}}) => {
   const [post, setPost] = useState<IPost>({
     userId: 0,
     id: 0,
-    title: "",
-    body: "",
+    title: "Loading. . .",
+    body: "Loading. . .",
   });
 
   const [users, setUsers] = useState<IData[]>([]);
+  const [comments, setComments] = useState<{postId: number; id: number;name:string;email:string;body:string}[]>([]);
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${params.post}`)
@@ -22,6 +23,12 @@ const Page = ({params}: {params: {post: number}}) => {
       .then((response) => response.json())
       .then((data) => setUsers(data));
   }, []);
+
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${params.post}/comments`)
+      .then((response) => response.json())
+      .then((data) => setComments(data));
+  }, [post]);
 
   return (
     <div>
@@ -36,6 +43,13 @@ const Page = ({params}: {params: {post: number}}) => {
             </div>
           </div>
         </div>
+        <h1 className="text-2xl font-bold mt-10">Comments:</h1>
+        {comments.map((comment) => (
+          <div className="w-full rounded-xl border-[2px] border-solid border-[#fff] p-4 mt-10" key={comment.id}>
+          <h1 className="text-xl font-bold mb-4">{comment.name}</h1>
+          <p className="text-md font-light"> {comment.body}</p>
+        </div>
+        ))}
       </div>
     </div>
   )
